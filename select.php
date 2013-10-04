@@ -13,17 +13,23 @@
 </body>
 </html>
 <script>
+
+	var ts;
+
 	window.onload = function(){
-		var ts = new textSelector("test", "The quick brown fox jumped over the hill.").init();
+		ts = new TextSelector("test", "The quick brown fox jumped over the hill.");
+		ts.init();
+		console.log(ts);
 	};
 
-	function textSelector(div, text) {
+	function TextSelector(div, text) {
 		
 		//Attributes
 		this.text = text;
 		this.div = document.getElementById(div);
 		this.start;
 		this.end;
+		this.highlights = [];
 
 		//Functions
 		this.init = init;
@@ -75,6 +81,8 @@
 				$$(".char")[i].addClassName('selected');
 			}
 			console.log("Highlighted from " + this.start + " to " + this.end);
+			this.highlights.push({'start' : start, 'end' : end});
+			console.log(this.highlights);
 		}
 
 		function setStart(start) {
