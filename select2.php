@@ -18,9 +18,7 @@
 		ts = Selectors.TextSelector.init("test", "Welcome to the Animal House");
 	}
 	
-	var Selectors = window.Selectors || {};
-
-	Selectors = {
+	var Selectors = window.Selectors || {
 		TextSelector: {
 				//Attributes
 				text : null,
@@ -100,7 +98,7 @@
 							this.end = null;
 						}
 				}
-			}
+			};
 
 		
 
