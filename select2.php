@@ -79,6 +79,8 @@
 								slider.clear();
 							});	
 						});	
+
+						return slider;
 					},
 				highlight : function highlight(start, end) {
 								for(var i = start; i <= end; i++) {
