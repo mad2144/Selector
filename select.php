@@ -15,12 +15,39 @@
 <script>
 
 	var ts;
+	var sp;
 
 	window.onload = function(){
-		ts = new TextSelector("test", "The quick brown fox jumped over the hill.");
-		ts.init();
-		console.log(ts);
+		// ts = new TextSelector("test", "The quick brown fox jumped over the hill.");
+		// ts.init();
+		// console.log(ts);
+		sp = {silence : function() {alert("");}};
+		ts = test("a", "b", sp);
+
 	};
+
+	var test = function (div, text, my) {
+		
+		//private
+		var that, div, text;
+		var speakLoud = function () {
+			alert("HELLO");
+		}
+
+		// augment shared object
+		my = my || {};
+		my.speak = function() {
+			alert("Hello");
+		}
+
+		// return public items
+		that = {};
+		that.speak = function() {
+			alert("Goodbye");
+		}
+
+		return that;
+	}
 
 	function TextSelector(div, text) {
 		
