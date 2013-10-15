@@ -1,4 +1,4 @@
-<html>
+,w<html>
 <head>
 	<script src="js/prototype.js" type="text/javascript"></script>
 	<style>
