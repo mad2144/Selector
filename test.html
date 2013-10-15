@@ -41,25 +41,19 @@
       container.observe("click", function() {
       });
      
-      $(document.body).observe("click", function(e) {
+      input.observe("keydown", function(e) {
         if(Event.element(e) == input) {
           new Ajax.Request('http://localhost/~Michael/Selector/api2.php', 
           {
-          method: 'GET',
-          parameters : {term : "love"},
-          onSuccess : function(xhr){
-            results = xhr.responseText.evalJSON(true);
-            drawResults(results);
-          }
+            method: 'GET',
+            parameters : {term : input.value},
+            onSuccess : function(xhr){
+              results = xhr.responseText.evalJSON(true);
+              drawResults(results);
+            }
           });
-        } else if (Event.element(e).hasClassName("autocompleteItem")){
-          input.value = Event.element(e).innerHTML;
-          value.value = Event.element(e).getAttribute("data");
-          $$('.autocompleteItem').invoke("remove");
-        }else {
-          $$('.autocompleteItem').invoke("remove");
-        }       
-      }); 
+        } 
+      });  
     }
 
     function drawResults(items) {
@@ -71,6 +65,12 @@
         item.innerHTML = '' + items[i].display;
         container.appendChild(item);
       }
+
+      $$(".autocompleteItem").invoke('observe', 'click', function(e){
+          input.value = Event.element(e).innerHTML;
+          value.value = Event.element(e).getAttribute("data");
+          $$('.autocompleteItem').invoke("remove");
+      });
     }
     
     autocompleter.init = init;

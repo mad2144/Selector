@@ -5,15 +5,14 @@ $term = $_GET["term"];
 
 $tuCurl = curl_init();
 
-curl_setopt($tuCurl, CURLOPT_URL, "http://ws.spotify.com/search/1/track" . "?q=" . $term);
+curl_setopt($tuCurl, CURLOPT_URL, "http://ws.spotify.com/search/1/artist.json" . "?q=" . $term);
 curl_setopt($tuCurl, CURLOPT_RETURNTRANSFER, true);
 
-$xml = new SimpleXMLElement(curl_exec($tuCurl));
-$json = json_encode($xml);
+$json = curl_exec($tuCurl);
 $arr = json_decode($json, TRUE);
 $values = array();
-for($i = 0; $i < min(10, count($arr['track'])); $i++) {
-  $values[] = array("display" => $arr['track'][$i]['name'], "value" => $arr['track'][$i]['@attributes']['href']);
+for($i = 0; $i < min(10, count($arr['artists'])); $i++) {
+  $values[] = array("display" => $arr['artists'][$i]['name'], "value" => $arr['artists'][$i]['href']);
 }
 echo(json_encode($values));
 curl_close($tuCurl);
